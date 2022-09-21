@@ -157,9 +157,12 @@ class ContainerChecker(object):
             if context["InstanceId"] == instance_id:
                 # tcp://ip-172-31-76-33.ap-southeast-2.compute.internal:1111
                 dns_address = context["DockerEndpoint"].split(":")[1].split("//")[1]
+                instance_type = context["InstanceType"]
         if dns_address:
             try:
-                response = json.loads(requests.get(f"http://{dns_address}:{port}/containers/json").content.decode("utf-8"))
+                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
+                cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/containers/json", cert=cert, verify=False).content.decode("utf-8"))
             except:
                 response = []
         self.containers = response\
@@ -231,9 +234,12 @@ class ImageChecker(object):
             if context["InstanceId"] == instance_id:
                 # example: tcp://ip-172-31-76-33.ap-southeast-2.compute.internal:1111
                 dns_address = context["DockerEndpoint"].split(":")[1].split("//")[1]
+                instance_type = context["InstanceType"]
         if dns_address:
             try:
-                response = json.loads(requests.get(f"http://{dns_address}:{port}/images/json").content.decode("utf-8"))
+                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
+                cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/images/json", cert=cert, verify=False).content.decode("utf-8"))
             except:
                 response = []
         self.images = response
