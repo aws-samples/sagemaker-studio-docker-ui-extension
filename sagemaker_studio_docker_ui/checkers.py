@@ -307,7 +307,7 @@ class PingChecker(object):
             try:
                 path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
                 cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
-                response = json.loads(requests.get(f"https://{dns_address}:{port}/version").content.decode("utf-8"), cert=cert, verify=False)
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/version", cert=cert, verify=False).content.decode("utf-8"))
                 self.status = HostStatus(1)
             except:
                 self.status = HostStatus(0)
