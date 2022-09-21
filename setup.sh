@@ -12,7 +12,7 @@ mv sagemaker_studio_docker_ui-0.1.0.tgz labextension/
 
 cd
 
-tar -czvf sagemaker_studio_docker_ui-0.1.0.tar.gz sagemaker-studio-docker-ui/
+tar -czvf sagemaker_studio_docker_ui-0.1.0.tar.gz sagemaker-studio-docker-ui-extension/
 
 pip install sagemaker_studio_docker_ui-0.1.0.tar.gz
 
