@@ -1,11 +1,26 @@
-## My Project
+# Sagemaker Studio Docker UI Extension
 
-TODO: Fill this README out!
+This JupyterLab extension interacts with docker hosts and SageMaker Studio Docker CLI to provide endpoints for Sagemaker Studio Docker UI. Installation instructions are listed below.
 
-Be sure to:
 
-* Change the title in this README
-* Edit your repository description on GitHub
+This extension is composed of a Python package named `sagemaker_studio_docker_ui`
+for the server extension and a NPM package named `sagemaker-studio-docker-ui`
+for the frontend extension.
+
+## Requirements
+
+* Please ensure your JupyterLab version is >= v1.2.18 and < 2.0. You can check the version by opening a terminal window in SageMaker Studio (File > New -> Terminal) and running the following command: 'jupyter lab --version'
+
+## Installation Steps
+
+Use Studio LifeCycle configuration
+
+### Uninstall
+
+```bash
+pip uninstall sagemaker_studio_docker_ui
+jupyter labextension uninstall sagemaker-studio-docker-ui
+```
 
 ## Security
 
@@ -13,5 +28,4 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 
 ## License
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
-
+This project is licensed under the MIT-0 License.

@@ -1,0 +1,11 @@
+:root {
+  --jp-runningHostIcon: url('./running-host.svg');
+  --jp-idleHostIcon: url('./idle-host.svg');
+  --jp-containerIcon: url('./container-icon.svg');
+  --jp-imageIcon: url('./image-icon.svg');
+}
+
+.jp-dockerIcon {
+  background-image: url('./docker-icon.svg');
+  background-size: contain;
+}
