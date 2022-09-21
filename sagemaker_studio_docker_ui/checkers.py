@@ -165,7 +165,7 @@ class ContainerChecker(object):
                 response = json.loads(requests.get(f"https://{dns_address}:{port}/containers/json", cert=cert, verify=False).content.decode("utf-8"))
             except:
                 response = []
-        self.containers = response\
+        self.containers = response
 
 class ImageChecker(object):
     def __init__(self):
