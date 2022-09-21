@@ -6,6 +6,8 @@ cd ~/sagemaker-studio-docker-ui-extension/labextension/sagemaker_studio_docker_u
 
 tar -czvf sagemaker_studio_docker_ui-0.1.0.tgz --exclude=.* --exclude=__py* package/
 
+mkdir -p labextension
+
 mv sagemaker_studio_docker_ui-0.1.0.tgz labextension/
 
 cd
