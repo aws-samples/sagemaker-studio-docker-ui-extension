@@ -297,13 +297,17 @@ class PingChecker(object):
         dns_address = None
         port = 1111
         current_context = ""
+        instance_type = ""
         for context in contexts:
             if context["InstanceId"] == instance_id:
                 dns_address = context["DockerEndpoint"].split(":")[1].split("//")[1]
                 current_context = context
+                instance_type = context["InstanceType"]
         if dns_address:
             try:
-                response = json.loads(requests.get(f"http://{dns_address}:{port}/version").content.decode("utf-8"))
+                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
+                cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/version").content.decode("utf-8"), cert=cert, verify=False)
                 self.status = HostStatus(1)
             except:
                 self.status = HostStatus(0)
