@@ -160,9 +160,9 @@ class ContainerChecker(object):
                 instance_type = context["InstanceType"]
         if dns_address:
             try:
-                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
-                cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
-                response = json.loads(requests.get(f"https://{dns_address}:{port}/containers/json", cert=cert, verify=False).content.decode("utf-8"))
+                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/"
+                cert=(path_to_cert + "client/cert.pem", path_to_cert + "client/key.pem")
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/containers/json", cert=cert, verify=path_to_cert + "ca/cert.pem").content.decode("utf-8"))
             except:
                 response = []
         self.containers = response
@@ -237,9 +237,9 @@ class ImageChecker(object):
                 instance_type = context["InstanceType"]
         if dns_address:
             try:
-                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
-                cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
-                response = json.loads(requests.get(f"https://{dns_address}:{port}/images/json", cert=cert, verify=False).content.decode("utf-8"))
+                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/"
+                cert=(path_to_cert + "client/cert.pem", path_to_cert + "client/key.pem")
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/images/json", cert=cert, verify=path_to_cert + "ca/cert.pem").content.decode("utf-8"))
             except:
                 response = []
         self.images = response
@@ -311,9 +311,9 @@ class PingChecker(object):
                 instance_type = context["InstanceType"]
         if dns_address:
             try:
-                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/client/"
-                cert=(path_to_cert + "cert.pem", path_to_cert + "key.pem")
-                response = json.loads(requests.get(f"https://{dns_address}:{port}/version", cert=cert, verify=False).content.decode("utf-8"))
+                path_to_cert = f"/home/sagemaker-user/.sagemaker_studio_docker_cli/{instance_type}_{instance_id}/certs/"
+                cert=(path_to_cert + "client/cert.pem", path_to_cert + "client/key.pem")
+                response = json.loads(requests.get(f"https://{dns_address}:{port}/version", cert=cert, verify=path_to_cert + "ca/cert.pem").content.decode("utf-8"))
                 self.status = HostStatus(1)
             except:
                 self.status = HostStatus(0)
