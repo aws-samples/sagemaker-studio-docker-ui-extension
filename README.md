@@ -43,13 +43,6 @@ fi
 nohup ~/sagemaker-studio-docker-ui-extension/setup.sh > docker_setup.out 2>&1 &
 ```
 
-### Uninstall
-
-```bash
-pip uninstall sagemaker_studio_docker_ui
-jupyter labextension uninstall sagemaker-studio-docker-ui
-```
-
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
