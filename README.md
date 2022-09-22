@@ -4,7 +4,7 @@ This JupyterLab extension interacts with docker hosts and SageMaker Studio Docke
 
 ![image](https://github.com/aws-samples/sagemaker-studio-docker-ui-extension/raw/main/SageMaker-Studio-Docker-UI.png)
 
-This extension is composed of a Python package named `sagemaker_studio_docker_ui`
+This extension is composed of a Python package named `sagemaker-studio-docker-ui`
 for the server extension and a NPM package named `sagemaker-studio-docker-ui`
 for the frontend extension.
 
