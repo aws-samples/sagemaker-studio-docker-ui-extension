@@ -1,7 +1,8 @@
 # Sagemaker Studio Docker UI Extension
 
-This JupyterLab extension interacts with docker hosts and SageMaker Studio Docker CLI to provide endpoints for Sagemaker Studio Docker UI. Installation instructions are listed below.
+This JupyterLab extension interacts with docker hosts and SageMaker Studio Docker CLI to provide customers with interactive UI to launch and manage docker hosts from within SageMaker Studio.
 
+![image](https://github.com/aws-samples/sagemaker-studio-docker-ui-extension/raw/main/SageMaker-Studio-Docker-UI.png)
 
 This extension is composed of a Python package named `sagemaker_studio_docker_ui`
 for the server extension and a NPM package named `sagemaker-studio-docker-ui`
