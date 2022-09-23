@@ -18,29 +18,35 @@ Use Studio LifeCycle configuration
 ```
 #!/bin/bash
 
-set -ex
-cd ~
-if cd sagemaker-studio-docker-cli-extension
-then
-    git reset --hard
-    git pull
+set -eux
+STATUS=$(python3 -c "import sagemaker_dataprep";echo $?)
+if [ "$STATUS" -eq 0 ]; then
+  echo 'Instance is of Type Data Wrangler'
 else
-    git clone https://github.com/aws-samples/sagemaker-studio-docker-cli-extension.git
-    cd sagemaker-studio-docker-cli-extension
-fi
-nohup ./setup.sh > docker_setup.out 2>&1 &
+  echo 'Instance is not of Type Data Wrangler'
+    cd ~
+    if cd sagemaker-studio-docker-cli-extension
+    then
+        git reset --hard
+        git pull
+    else
+        git clone https://github.com/aws-samples/sagemaker-studio-docker-cli-extension.git
+        cd sagemaker-studio-docker-cli-extension
+    fi
+    nohup ./setup.sh > docker_setup.out 2>&1 &
 
-if cd ~/sagemaker-studio-docker-ui-extension
-then
-    git reset --hard
-    git pull
-    cd
-else
-    cd
-    git clone https://github.com/aws-samples/sagemaker-studio-docker-ui-extension.git
-fi
+    if cd ~/sagemaker-studio-docker-ui-extension
+    then
+        git reset --hard
+        git pull
+        cd
+    else
+        cd
+        git clone https://github.com/aws-samples/sagemaker-studio-docker-ui-extension.git
+    fi
 
-nohup ~/sagemaker-studio-docker-ui-extension/setup.sh > docker_setup.out 2>&1 &
+    nohup ~/sagemaker-studio-docker-ui-extension/setup.sh > docker_setup.out 2>&1 &
+fi
 ```
 
 ## Security
