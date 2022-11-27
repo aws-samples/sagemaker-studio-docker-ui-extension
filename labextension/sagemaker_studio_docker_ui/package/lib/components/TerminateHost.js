@@ -11,13 +11,14 @@ async function terminateHost(instance, instanceId){
       method: 'POST',
     });
     console.log(reply);
-    instance.addAlert({message: `Terminating host ${instanceId}`});
+    instance.addAlert({message: `Terminating host ${instanceId}`, wait: 5000 });
   }
   catch (reason) {
     console.error(`Error on POST /docker-host/terminate_host ${JSON.stringify(dataToSend)}.\n${reason}`);
     instance.addAlert({
         type: "error",
         message: `Error terminating host! "`,
+        wait: 5000
     });
   };
 }

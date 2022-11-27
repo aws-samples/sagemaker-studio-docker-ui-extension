@@ -25,6 +25,7 @@ export async function getContexts(instance){
     instance.addAlert({
         type: "error",
         message: `Error checking contexts list! "`,
+        wait: 5000
     });
     contexts = []
   };

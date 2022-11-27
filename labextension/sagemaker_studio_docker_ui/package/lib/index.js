@@ -1,7 +1,5 @@
 import { ILayoutRestorer } from '@jupyterlab/application';
 import { IStateDB } from '@jupyterlab/coreutils';
-import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
-import { IIconRegistry } from '@jupyterlab/ui-components';
 import { requestAPIServer } from './sagemaker-studio-docker-ui';
 import { SdockerWidget } from './widgets/SdockerWidget';
 /**
@@ -10,8 +8,8 @@ import { SdockerWidget } from './widgets/SdockerWidget';
 const extension = {
     id: 'sagemaker-studio-docker-ui',
     autoStart: true,
-    requires: [ILayoutRestorer, IIconRegistry, IRenderMimeRegistry, IStateDB],
-    activate: async (app, restorer, iconRegistry, rendermime, stateDB) => {
+    requires: [ILayoutRestorer, IStateDB],
+    activate: async (app, restorer, stateDB) => {
         console.log('JupyterLab extension sagemaker-studio-docker-ui is activated!');
         let INSTANCE_TYPE = 'm5.large';
         const KEY = 'sagemaker-studio-docker-ui:settings:data';

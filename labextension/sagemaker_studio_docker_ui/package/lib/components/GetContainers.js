@@ -21,6 +21,7 @@ export async function getContainers(instance){
     instance.addAlert({
         type: "error",
         message: `Error checking containers list! "`,
+        wait: 5000
     });
     contexts = []
   };

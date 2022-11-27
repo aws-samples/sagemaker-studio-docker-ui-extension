@@ -21,6 +21,7 @@ export async function getImages(instance){
     instance.addAlert({
         type: "error",
         message: `Error checking images list! "`,
+        wait: 5000
     });
     images = []
   };

@@ -44,23 +44,22 @@ export class SdockerPanel extends React.Component {
         this.handleSubmit = async () => {
             console.log("Creating new docker host");
             const dataToSend = { instance_type: this.state.INSTANCE_TYPE };
-            this.clearAlerts();
             try {
                 const reply = await requestAPIServer("create_host", {
                     body: JSON.stringify(dataToSend),
                     method: "POST",
                 });
                 console.log(reply);
-                this.addAlert({ message: `Creating new docker host - instance will appear once it is healthy, might take few minutes` });
+                this.addAlert({ message: `Creating new docker host - instance will appear once it is healthy, might take few minutes`, wait 15000 });
             }
             catch (reason) {
                 console.error(`Error on POST /docker-host/create_host ${dataToSend}.\n${reason}`);
                 this.addAlert({
                     type: "error",
                     message: `Error creating new docker host! "`,
+                    wait: 5000
                 });
             }
-            setInterval(() => this.clearAlerts(), 5000);
         };
         this.alertKey = 0;
         this.state = {
@@ -197,9 +196,7 @@ export class SdockerPanel extends React.Component {
         const key = this.alertKey++;
         const keyedAlert = Object.assign(Object.assign({}, alert), { key: `alert-${key}` });
         this.setState({ alerts: [keyedAlert] });
-    }
-    clearAlerts() {
-        this.setState({ alerts: [] });
+        setTimeout(() => { this.setState({ alerts: [] }) }, alert.wait );
     }
     saveState() {
         const state = {
