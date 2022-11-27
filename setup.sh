@@ -16,7 +16,7 @@ then
     tar -czvf sagemaker_studio_docker_ui_extension.tar.gz --exclude=.* sagemaker-studio-docker-ui-extension/
     PACKAGE=sagemaker_studio_docker_ui_extension.tar.gz
 else
-    PACKAGE=https://github.com/aws-samples/sagemaker-studio-docker-ui-extension/releases/download/v0.1.0/sagemaker_studio_docker_ui_extension.tar.gz
+    PACKAGE=https://github.com/aws-samples/sagemaker-studio-docker-ui-extension/releases/download/JL1/sagemaker_studio_docker_ui_extension.tar.gz
 fi;
 
 pip install $PACKAGE

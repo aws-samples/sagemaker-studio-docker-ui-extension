@@ -50,7 +50,7 @@ export class SdockerPanel extends React.Component {
                     method: "POST",
                 });
                 console.log(reply);
-                this.addAlert({ message: `Creating new docker host - instance will appear once it is healthy, might take few minutes`, wait 15000 });
+                this.addAlert({ message: `Creating new docker host - instance will appear once it is healthy, might take few minutes`, wait: 15000 });
             }
             catch (reason) {
                 console.error(`Error on POST /docker-host/create_host ${dataToSend}.\n${reason}`);
