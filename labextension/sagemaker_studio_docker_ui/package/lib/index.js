@@ -1,5 +1,5 @@
 import { ILayoutRestorer } from '@jupyterlab/application';
-import { IStateDB } from '@jupyterlab/coreutils';
+import { IStateDB } from '@jupyterlab/statedb';
 import { requestAPIServer } from './sagemaker-studio-docker-ui';
 import { SdockerWidget } from './widgets/SdockerWidget';
 /**

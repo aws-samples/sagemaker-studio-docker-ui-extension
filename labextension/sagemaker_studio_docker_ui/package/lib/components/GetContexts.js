@@ -6,7 +6,8 @@ import {
   itemIconSpan,
   instanceDescriptionDiv,
   runningHostStyle,
-  idleHostStyle
+  idleHostStyle,
+  powerIconStyle
 } from '../style/getContextsStyle';
 import { ContextSwitcher } from './SwitchContext';
 import { HostTerminator } from './TerminateHost';
@@ -57,7 +58,7 @@ function getItem(
         {
           className: SHUTDOWN_BUTTON_CLASS,
           tooltip: 'Set as default docker host',
-          iconClassName: idleHostStyle,
+          iconClass: idleHostStyle,
           onClick: switcherInstance.switcher
         }
       );
@@ -88,7 +89,7 @@ function getItem(
           {
             className: SHUTDOWN_BUTTON_CLASS,
             tooltip: tooltip,
-            iconClassName: "jp-CodeQuitIcon",
+            iconClass: powerIconStyle,
             onClick: terminatorInstance.terminator
           }
         )

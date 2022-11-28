@@ -107,3 +107,21 @@ export const containerIconStyle = style(
     lineHeight: 'var(--jp-private-running-item-height)'
   }
 )
+export const powerIconStyle = style(
+  {
+    backgroundImage: 'var(--jp-powerIcon)',
+    flex: '0 0 auto',
+    padding: '0px 8px',
+    marginRight: '6px',
+    marginLeft: '12px',
+    verticalAlign: 'middle',
+    backgroundSize: '16px',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    color: 'var(--jp-ui-font-color1)',
+    lineHeight: 'var(--jp-private-running-item-height)'
+  }
+)
