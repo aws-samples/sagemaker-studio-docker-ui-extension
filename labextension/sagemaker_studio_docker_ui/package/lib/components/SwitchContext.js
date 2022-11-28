@@ -11,7 +11,7 @@ async function switchContext(instance, instanceType, instanceId){
       method: 'POST',
     });
     console.log(reply);
-    instance.addAlert({message: `Switching to host ${instanceId}`, wait: 5000});
+    instance.addAlert({ message: `Switching to host ${instanceId}`, wait: 5000 });
   }
   catch (reason) {
     console.error(`Error on POST /docker-host/switch_context ${JSON.stringify(dataToSend)}.\n${reason}`);
