@@ -3,7 +3,7 @@ import os
 def create_host(instance_type):
     is_bash_profile = os.path.isfile("/home/sagemaker-user/.bash_profile")
     is_bashrc = os.path.isfile("/home/sagemaker-user/.bashrc")
-    command = f"sdocker create-host --instance-type {instance_type} &"
+    command = f"sdocker create-host --instance-type {instance_type} &>> /home/sagemaker-user/.sagemaker_studio_docker_ui/ui_commands.log &"
     bash_comm = ""
     if is_bash_profile:
         bash_comm = "/bin/bash /home/sagemaker-user/.bash_profile &&"
