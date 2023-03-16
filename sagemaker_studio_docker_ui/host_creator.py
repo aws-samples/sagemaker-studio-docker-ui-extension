@@ -1,4 +1,13 @@
 import subprocess
+import os
        
 def create_host(instance_type):
-        subprocess.Popen(["sdocker","create-host","--instance-type", instance_type])
+    is_bash_profile = os.path.isfile("/home/sagemaker-user/.bash_profile")
+    is_bashrc = os.path.isfile("/home/sagemaker-user/.bashrc")
+    command = ["sdocker","create-host","--instance-type", instance_type]
+    bash_comm = []
+    if is_bash_profile:
+        bash_comm = ["/bin/bash", "/home/sagemaker-user/.bash_profile", "&&"]
+    elif is_bashrc:
+        bash_comm = ["/bin/bash", "/home/sagemaker-user/.bashrc", "&&"]
+    subprocess.Popen(bash_comm + command)
