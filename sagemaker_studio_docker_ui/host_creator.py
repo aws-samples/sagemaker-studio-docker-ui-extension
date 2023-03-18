@@ -6,7 +6,8 @@ def create_host(instance_type):
     command = f"sdocker create-host --instance-type {instance_type} &>> /home/sagemaker-user/.sagemaker_studio_docker_cli/ui_commands.log &"
     bash_comm = ""
     if is_bash_profile:
-        bash_comm = "/bin/bash /home/sagemaker-user/.bash_profile &&"
+        bash_comm = "source ~/.bash_profile &&"
     elif is_bashrc:
-        bash_comm = "/bin/bash /home/sagemaker-user/.bashrc &&"
+        bash_comm = "source ~/.bash_profile &&"
+    
     os.system(bash_comm + command)
