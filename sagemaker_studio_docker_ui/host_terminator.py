@@ -1,6 +1,6 @@
 import os
        
-def create_host(instance_type):
+def terminate_host(instance_type):
     is_bash_profile = os.path.isfile("/home/sagemaker-user/.bash_profile")
     is_bashrc = os.path.isfile("/home/sagemaker-user/.bashrc")
     command = f"sdocker terminate-host --instance-type {instance_type} &>> /home/sagemaker-user/.sagemaker_studio_docker_cli/ui_commands.log &"
