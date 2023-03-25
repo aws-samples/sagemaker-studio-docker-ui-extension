@@ -5,10 +5,12 @@ import subprocess
 import requests
 import json
 from enum import Enum
+import logging as log
 
 
 def get_context():
     cmd = ["docker", "context",  "list", "--format={{.Current}},{{.DockerEndpoint}},{{.Name}}"]
+    log.debug("Listing docker contexts")
     contexts_raw = subprocess.run(cmd, stdout=subprocess.PIPE)
     contexts = contexts_raw.stdout.decode("utf-8").split("\n")[:-1]
     response = []
@@ -152,10 +154,10 @@ class ContainerChecker(object):
         contexts = get_context()
         reponse = []
         dns_address = None
-        port = 1111
         for context in contexts:
             if context["InstanceId"] == instance_id:
-                # tcp://ip-172-31-76-33.ap-southeast-2.compute.internal:1111
+                # example - tcp://ip-172-31-76-33.ap-southeast-2.compute.internal:1111
+                port = context["DockerEndpoint"].split(":")[-1]
                 dns_address = context["DockerEndpoint"].split(":")[1].split("//")[1]
                 instance_type = context["InstanceType"]
         if dns_address:
@@ -229,10 +231,10 @@ class ImageChecker(object):
     async def image_checks(self, instance_id):
         contexts = get_context()
         dns_address = None
-        port = 1111
         for context in contexts:
             if context["InstanceId"] == instance_id:
                 # example: tcp://ip-172-31-76-33.ap-southeast-2.compute.internal:1111
+                port = context["DockerEndpoint"].split(":")[-1]
                 dns_address = context["DockerEndpoint"].split(":")[1].split("//")[1]
                 instance_type = context["InstanceType"]
         if dns_address:
@@ -301,11 +303,11 @@ class PingChecker(object):
     async def ping_checks(self, instance_id):
         contexts = get_context()
         dns_address = None
-        port = 1111
         current_context = ""
         instance_type = ""
         for context in contexts:
             if context["InstanceId"] == instance_id:
+                port = context["DockerEndpoint"].split(":")[-1]
                 dns_address = context["DockerEndpoint"].split(":")[1].split("//")[1]
                 current_context = context
                 instance_type = context["InstanceType"]
@@ -317,6 +319,7 @@ class PingChecker(object):
                 self.status = HostStatus(1)
             except:
                 self.status = HostStatus(0)
+                log.error("Failed to ping host, removing docker context!")
                 cmd = ["docker", "context",  "use", "default"]
                 contexts_raw = subprocess.run(cmd, stdout=subprocess.PIPE)
                 cmd = ["docker", "context",  "rm", f"{current_context['InstanceType']}_{current_context['InstanceId']}"]

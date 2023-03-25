@@ -45,16 +45,38 @@ nohup ~/sagemaker-studio-docker-ui-extension/setup.sh > docker_setup.out 2>&1 &
 ```
 
 ## Setting up proxy
-To setup a proxy through environment variables, use either `/home/sagemaker/.bash_profile` or `/home/sagemaker/.bashrc` to set any required environment variables. This extension with make sure to source one of these files if it was able to detect them before running any CLI commands.
+To setup a proxy through environment variables, use either `/home/sagemaker/.bash_profile` or `/home/sagemaker/.bashrc` to set any required environment variables. This extension will make sure to source one of these files if it was able to detect them before running any CLI commands.
 
 Below is an example of a script you can use in your life cycle configuration:
 ```
-echo export http_proxy=http://<some proxy url>:3128 >> ~/.bash_profile
-echo export https_proxy=http://<some proxy url>:3128 >> ~/.bash_profile
-echo export HTTPS_PROXY=http://<some proxy url>:3128 >> ~/.bash_profile
-echo export HTTP_PROXY=http://<some proxy url>:3128 >> ~/.bash_profile
+# Required to enable yum access proxy for JupyterServer App
+sudo bash -c "echo proxy=<proxy server>:<port> >> /etc/yum.conf"
+
+# Required to enable both CLI and UI extension to access proxy for JupyterServer or KernelGateway
+cat > ~/.bash_profile << EOF
+export http_proxy=<proxy server>:<port>
+export https_proxy=<proxy server>:<port>
+export HTTPS_PROXY=<proxy server>:<port>
+export HTTP_PROXY=<proxy server>:<port>
+export NO_PROXY=127.0.0.1,localhost,169.254.169.254,.ec2.internal
+export no_proxy=127.0.0.1,localhost,169.254.169.254,.ec2.internal
+EOF
+
 source ~/.bash_profile
+
+# Required for installing docker on JupyterServer
+sudo -u root bash -c "cat > /root/.bash_profile << EOF
+export http_proxy=<proxy server>:<port>
+export https_proxy=<proxy server>:<port>
+export HTTPS_PROXY=<proxy server>:<port>
+export HTTP_PROXY=<proxy server>:<port>
+export NO_PROXY=127.0.0.1,localhost,169.254.169.254,.ec2.internal
+export no_proxy=127.0.0.1,localhost,169.254.169.254,.ec2.internal
+EOF"
 ```
+
+## Troubleshooting
+This extension logs its activity to `/home/sagemaker-user/.sagemaker_studio_docker_cli/ui_extension.log`
 
 ## Security
 

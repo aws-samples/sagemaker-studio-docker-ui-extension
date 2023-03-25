@@ -1,5 +1,5 @@
 import json
-
+import logging
 import tornado
 import urllib3
 from notebook.base.handlers import APIHandler
@@ -228,6 +228,11 @@ class PingHandler(APIHandler):
 # Function to setup the web handdlers
 def setup_handlers(web_app, url_path):
     global base_url
+    logging.basicConfig(format='%(asctime)s %(levelname)s [%(filename)s:%(lineno)d]: %(message)s',
+                        datefmt='%m/%d/%Y %H:%M:%S',
+                        filename=f'/home/sagemaker-user/.sagemaker_studio_docker_cli/ui_extension.log',
+                        level=logging.INFO)
+    logging.info("Starting UI extension server...")
 
     host_pattern = ".*$"
 
