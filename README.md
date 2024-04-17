@@ -1,5 +1,5 @@
-# Sagemaker Studio Docker UI Extension - UI to manage Docker integration for SageMaker Studio
-
+# [DEPRECATED] Sagemaker Studio Docker UI Extension - UI to manage Docker integration for SageMaker Studio
+**Refer to new [Local Mode](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-local.html) by SageMaker service for recommended alternative**
 This JupyterLab extension interacts with docker hosts and SageMaker Studio Docker CLI to provide customers with interactive UI to launch and manage docker hosts from within SageMaker Studio.
 
 ![image](https://github.com/aws-samples/sagemaker-studio-docker-ui-extension/raw/main/SageMaker-Studio-Docker-UI.png)
